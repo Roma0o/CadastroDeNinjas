@@ -1,10 +1,14 @@
-package com.treino.CadastroDeNinjas;
+package com.treino.CadastroDeNinjas.Ninjas;
 
+import com.treino.CadastroDeNinjas.Missoes.MissoesModel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.util.List;
 
 /**
  *
@@ -12,15 +16,21 @@ import jakarta.persistence.Table;
  */
 
 @Entity
-@Table(name = "tb_cadastro")
+@Table(name = "tb_ninjas")
 public class NinjaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String nome;
+    
     private String email;
+    
     private int idade;
+    
+    @ManyToOne // Varias missões, mas só um ninja por missão
+    @JoinColumn(name = "missao_id") // FK
+    private MissoesModel missao;
 
     public NinjaModel() {
     }
